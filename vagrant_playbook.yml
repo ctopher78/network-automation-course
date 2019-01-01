@@ -1,0 +1,9 @@
+---
+- name: Vagrant provisioning playbook
+  hosts: all
+  connection: local
+  become: true
+
+  tasks:
+  - name: test
+    command: hostname
