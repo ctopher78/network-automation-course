@@ -5,35 +5,8 @@
   become: true
 
   tasks:
-  - name: install tcpdump
-    yum:
-      name: 
-        - tcpdump
-      state: present
-  
-  - name: install dhcp
-    yum:
-      name: 
-        - dhcp
-      state: present
-
-  - name: install tftp server
-    yum:
-      name: 
-        - tftp
-        - tftp-server
-        - xinetd
-      state: present
-
-  - name: enable service and start dhcp, xinetd, and tftp
-    systemd:
-      name: "{{ item }}"
-      enabled: yes
-    with_items:
-        - "dhcp"
-        - "xinetd"
-        - "tftp"
-
+    - include_role:
+        name: mgt_server
 
 
 

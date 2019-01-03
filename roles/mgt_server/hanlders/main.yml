@@ -1,0 +1,5 @@
+---
+- name: restart dhcpd
+  systemd:
+    name: dhcpd
+    state: reloaded

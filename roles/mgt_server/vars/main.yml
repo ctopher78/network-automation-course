@@ -1,0 +1,9 @@
+---
+dhcp_config: /etc/dhcp/dhcpd.conf
+dhcp_server: 192.168.2.1
+dhcp_subnet: 192.168.2.0
+dhcp_netmask: 255.255.255.0
+poap_script: nxos_poap.py
+dhcp_range: 
+  low: 192.168.2.2
+  high: 192.168.2.5

@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
     server.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "vagrant_playbook.yml"
         ansible.install_mode = "pip"
-    server.vm.network "private_network", ip: "192.168.1.1", virtualbox__intnet: "mgt1-spn1"
+    server.vm.network "private_network", ip: "192.168.2.1", virtualbox__intnet: "mgt1-spn1"
     end
   end
   
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     spine1.ssh.insert_key = false
     spine1.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
-    spine1.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: "mgt1-spn1"
+    spine1.vm.network "private_network", ip: "192.168.2.2", virtualbox__intnet: "mgt1-spn1"
     end
   end
 end
