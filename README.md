@@ -9,6 +9,7 @@
 
 ## vagrantfile resources
 [github/ipspace example vagrant topologies](https://github.com/ipspace/NetOpsWorkshop/tree/master/topologies)
+
 [github.com/dravetech example vagrantfile](https://github.com/dravetech/network-tutorials/tree/master/labs/lab1)
 
 ## vagrant networking
