@@ -1,6 +1,8 @@
 subnet {{ dhcp_subnet }} netmask {{ dhcp_netmask }} {
   option routers {{ dhcp_server }};
-  option tftp-server-name "{{ dhcp_server }}";
   option bootfile-name "{{ poap_script }}";
+  option tftp-server-name "{{ dhcp_server }}";
+  ## needed to add this option to address bug (CSCvf74379)
+  option www-server {{ dhcp_server }};
   range {{ dhcp_range.low }} {{ dhcp_range.high }};
 }

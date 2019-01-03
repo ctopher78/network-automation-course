@@ -1,5 +1,5 @@
----
-- name: restart dhcpd
-  systemd:
-    name: dhcpd
-    state: reloaded
+handlers:
+  - name: restart dhcpd
+    systemd:
+      name: dhcpd
+      state: reloaded

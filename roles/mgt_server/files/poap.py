@@ -44,9 +44,9 @@ options = {
    "username": "root",
    "password": "password",
    "hostname": "2.1.1.1",
-   "transfer_protocol": "scp",
+   "transfer_protocol": "tftp",
    "mode": "serial_number",
-   "target_system_image": "nxos.7.0.3.I4.4.bin",
+   "target_system_image": "nxos.7.0.3.I6.1.bin",
 }
 
 
