@@ -1,0 +1,35 @@
+---
+- name: install dhcp
+  yum:
+    name: 
+      - dhcp
+    state: present
+
+- name: install tftp server
+  yum:
+    name: 
+      - tftp
+      - tftp-server
+      - xinetd
+    state: present
+
+- name: enable service and start dhcp, xinetd, and tftp
+  systemd:
+    name: "{{ service }}"
+    enabled: yes
+  loop:
+      - "dhcpd"
+      - "xinetd"
+      - "tftp"
+  loop_control:
+    loop_var: service
+
+- name: Install dhcp config file
+  template:
+    src: dhcpd.conf.j2
+    dest: "{{ dhcp_config }}"
+    owner: root
+    group: root
+    mode: 0644
+    validate: 'dhcpd -t -cf %s'
+  notify: restart dhcpd
