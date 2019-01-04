@@ -33,3 +33,6 @@ brew install socat
 ```
 socat UNIX-CONNECT:/tmp/test STDIN
 ```
+
+## NX-OSv POAP
+- The bios upgrade check fails on v9k because the bios version can't be parsed from the `show ver` (the value is null)
