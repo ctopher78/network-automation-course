@@ -1,0 +1,9 @@
+
+hostname {{ hostname }}
+
+username admin password {{ admin_pass }}
+
+{% for iface in interfaces %}
+interface {{ iface.name }}
+  ip address {{ iface.ip }}/{{ iface.mask }}
+{% endfor %}

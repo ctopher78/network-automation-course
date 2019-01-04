@@ -7,6 +7,8 @@
   tasks:
     - include_role:
         name: mgt_server
+    - include_role:
+        name: spine
 
 
 
