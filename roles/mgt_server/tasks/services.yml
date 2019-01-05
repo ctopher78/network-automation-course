@@ -24,12 +24,23 @@
   loop_control:
     loop_var: service
 
+- name: Install tftp config file
+  template: 
+    src: "{{ tftp_template }}"
+    dest: "{{ tftp_config_path }}{{ tftp_config }}"
+    owner: root
+    group: root
+    mode: 0644
+  # notify: 
+  #   - restart tftp
+
 - name: Install dhcp config file
   template:
-    src: dhcpd.conf.j2
+    src: "{{ dhcp_template }}"
     dest: "{{ dhcp_config }}"
     owner: root
     group: root
     mode: 0644
     validate: 'dhcpd -t -cf %s'
-  notify: restart dhcpd
+  # notify: 
+  #   - restart dhcpd

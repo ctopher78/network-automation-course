@@ -43,10 +43,12 @@ versions where upgrading will take time
 options = {
    "username": "root",
    "password": "password",
-   "hostname": "2.1.1.1",
+   "hostname": "192.168.2.1",
    "transfer_protocol": "tftp",
    "mode": "serial_number",
    "target_system_image": "nxos.7.0.3.I6.1.bin",
+   "config_path": "/",
+   "disable_md5": True
 }
 
 
