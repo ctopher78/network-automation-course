@@ -9,6 +9,3 @@
         name: mgt_server
     - include_role:
         name: spine
-
-
-

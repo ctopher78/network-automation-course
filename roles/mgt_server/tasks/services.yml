@@ -31,8 +31,8 @@
     owner: root
     group: root
     mode: 0644
-  # notify: 
-  #   - restart tftp
+  notify: 
+    - restart tftp
 
 - name: Install dhcp config file
   template:
@@ -42,5 +42,5 @@
     group: root
     mode: 0644
     validate: 'dhcpd -t -cf %s'
-  # notify: 
-  #   - restart dhcpd
+  notify: 
+    - restart dhcpd
