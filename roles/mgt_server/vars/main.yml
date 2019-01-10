@@ -1,4 +1,5 @@
 ---
+## dhcp config vars
 dhcp_config_path: /etc/dhcp/
 dhcp_config: dhcpd.conf
 dhcp_template: dhcpd.conf.j2
@@ -11,7 +12,21 @@ dhcp_range:
   high: 192.168.2.2
 
 ## TFTP vars
-
 tftp_config_path: /etc/xinetd.d/
 tftp_config: tftp
 tftp_template: tftp.j2
+
+## Golang vars
+gopath: /home/vagrant/go
+goroot: /usr/local/go
+go_download_location: https://dl.google.com/go/{{go_tarball}}
+go_tarball: go1.11.4.linux-amd64.tar.gz
+go_tarball_checksum: "sha256:fb26c30e6a04ad937bbc657a1b5bba92f80096af1e8ee6da6430c045a8db3a5b"
+go_version_target: "go version go1.11.4 linux/amd64"
+go_bin: $PATH:/usr/local/go/bin
+go_path: GOPATH=$HOME/go
+
+# Go get
+go_get:
+- name: gopacket
+  url: github.com/google/gopacket
