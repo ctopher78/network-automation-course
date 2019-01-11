@@ -37,7 +37,7 @@
 - name: Install dhcp config file
   template:
     src: "{{ dhcp_template }}"
-    dest: "{{ dhcp_config }}"
+    dest: "{{ dhcp_config_path }}{{ dhcp_config }}"
     owner: root
     group: root
     mode: 0644

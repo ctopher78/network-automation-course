@@ -1,6 +1,6 @@
 hostname: spine1
-admin_pass: admin1234
+admin_pass: Admin1234!
 tftp_dir: /var/lib/tftpboot
-cfg_name: cfg.000000000
+cfg_name: conf.00000000000
 interfaces:
   - {name: eth1/1, ip: 192.168.2.2, mask: 24}

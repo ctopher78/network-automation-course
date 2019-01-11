@@ -1,9 +1,15 @@
 
 hostname {{ hostname }}
 
-username admin password {{ admin_pass }}
+username admin password 0 {{ admin_pass }} role network-admin
 
 {% for iface in interfaces %}
 interface {{ iface.name }}
+  no shut
+  no switchport
   ip address {{ iface.ip }}/{{ iface.mask }}
 {% endfor %}
+
+interface mgmt0
+  no shut
+  ip address dhcp

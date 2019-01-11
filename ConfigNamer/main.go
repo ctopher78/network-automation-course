@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"time"
 
@@ -30,8 +31,6 @@ func main() {
 		timeout     time.Duration = 30 * time.Second
 	)
 
-	inDHCP := make(chan interface{})
-
 	// Create a live packet handler on eth1
 	handle, err := pcap.OpenLive(device, snapshotLen, promiscuous, timeout)
 	if err != nil {
@@ -41,7 +40,7 @@ func main() {
 
 	// filter on server bound
 	// TFTP traffic
-	filter := "udp and port 67"
+	filter := "udp and dst port 67"
 	err = handle.SetBPFFilter(filter)
 	if err != nil {
 		log.Fatal(err)
@@ -73,23 +72,37 @@ func parseDHCPOpts(dhcp *layers.DHCPv4) (id dhcpID, is9k bool) {
 			}
 		}
 		if opt.Type.String() == "ClientID" {
-			id.ClientID = string(opt.Data)
+			// the clientID returned has
+			// unprintable characters, which break
+			// os.Stat().  They need to be removed
+			// immediately.
+			s := fmt.Sprintf("%s", opt.Data)
+			re, err := regexp.Compile(`\x00`)
+			if err != nil {
+				log.Fatal()
+			}
+			clean := re.ReplaceAllLiteralString(s, "")
+			id.ClientID = clean
 		}
 	}
 	return id, true
 }
 
 func updateConfigName(id dhcpID) error {
-	fn := fmt.Sprintf("cfg.%s", id.ClientID)
+	fn := fmt.Sprintf("conf.%s", id.ClientID)
 	fnMD5 := fmt.Sprintf("%s.md5", fn)
 
-	log.Printf("checking for config file named: %s\n", fn)
+	fpath := filepath.Join(tftpdir, fn)
+	fpathMd5 := filepath.Join(tftpdir, fnMD5)
 
-	_, err := os.Stat(fn)
-	_, err = os.Stat(fnMD5)
+	log.Printf("checking for config file named: %s\n", fn)
+	_, err := os.Stat(fpath)
+	_, errmd5 := os.Stat(fpathMd5)
+	fmt.Println(err)
+	fmt.Println(errmd5)
 	// if both files exist (config/md5),
 	// all is good, return from func
-	if !os.IsNotExist(err) {
+	if !os.IsNotExist(err) || !os.IsNotExist(errmd5) {
 		return nil
 	}
 
@@ -98,15 +111,28 @@ func updateConfigName(id dhcpID) error {
 	if err != nil {
 		return err
 	}
+
+	cfgRE, err := regexp.Compile(`conf.\S{11}.*`)
+	var match bool
 	for _, file := range files {
-		if match, err := regexp.Match(`conf.\d{11}.*`, file.Name()); err != nil {
+		oldconfig := filepath.Join(tftpdir, file.Name())
+		oldmd5 := filepath.Join(tftpdir, file.Name()+".md5")
+		if match = cfgRE.Match([]byte(file.Name())); err != nil {
 			return err
 		}
 		if match {
-			fmt.Println(file.Name())
+			// rename old config file
+			err = os.Rename(oldconfig, fpath)
+			if err != nil {
+				log.Print(err)
+			}
+			// rename md5 file
+			err = os.Rename(oldmd5, fpathMd5)
+			if err != nil {
+				log.Print(err)
+			}
 		}
 	}
-	// write new files
 
 	return nil
 }

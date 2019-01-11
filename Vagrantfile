@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
     spine1.vm.boot_timeout = 60
     spine1.vm.box = "nxos/7.0.3.I6.1"
     spine1.ssh.insert_key = false
+    spine1.ssh.username = "admin"
     spine1.vm.synced_folder '.', '/vagrant', disabled: true
     spine1.vm.network "private_network", ip: "192.168.2.2", virtualbox__intnet: "mgt1-spn1"
     spine1.vm.provider "virtualbox" do |vb|
