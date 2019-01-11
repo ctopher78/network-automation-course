@@ -1504,6 +1504,12 @@ def is_bios_upgrade_needed():
     Check if bios upgrade is required. It's required when the current
     bios is not 3.x and image upgrade is from 6.x to 7.x or higher
     """
+    ver = cli("show version")
+    # return early if this is a virtual NX-OS device.
+    if "NX-OSv Chassis" in ver:
+        poap_log("Virtual Switch - Bios upgrade not needed")
+        return False
+
     global single_image
     last_upgrade_bios = 3
     ver = get_version()
