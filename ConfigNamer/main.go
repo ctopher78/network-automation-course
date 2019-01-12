@@ -117,9 +117,7 @@ func updateConfigName(id dhcpID) error {
 	for _, file := range files {
 		oldconfig := filepath.Join(tftpdir, file.Name())
 		oldmd5 := filepath.Join(tftpdir, file.Name()+".md5")
-		if match = cfgRE.Match([]byte(file.Name())); err != nil {
-			return err
-		}
+		match = cfgRE.Match([]byte(file.Name()))
 		if match {
 			// rename old config file
 			err = os.Rename(oldconfig, fpath)
