@@ -1507,7 +1507,7 @@ def is_bios_upgrade_needed():
     ver = cli("show version")
     # return early if this is a virtual NX-OS device.
     if "NX-OSv Chassis" in ver:
-        poap_log("Virtual Switch - Bios upgrade not needed")
+        poap_log("Virtual NXOS Switch - Bios upgrade not needed")
         return False
 
     global single_image
