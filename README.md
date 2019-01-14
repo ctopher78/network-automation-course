@@ -1,6 +1,6 @@
 # network-automation-course
 
-![Base Network Diagram](images/base_network_diagram.png)
+![Base Network Diagram](images/base_%20network_diagram.png)
 
 
 # resources
