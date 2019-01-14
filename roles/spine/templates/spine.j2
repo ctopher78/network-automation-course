@@ -13,3 +13,7 @@ interface {{ iface.name }}
 interface mgmt0
   no shut
   ip address dhcp
+
+{% for server in logging_servers %}
+logging server {{ server }}
+{% endfor %}
