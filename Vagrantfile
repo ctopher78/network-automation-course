@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "mgt_server" do |server|
     server.vm.box = "bento/centos-7"
     server.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "vagrant_playbook.yml"
+        ansible.playbook = "vagrant_provisioner.yml"
         ansible.install_mode = "pip"
     server.vm.network "private_network", ip: "192.168.2.1", virtualbox__intnet: "mgt1-spn1"
     end
