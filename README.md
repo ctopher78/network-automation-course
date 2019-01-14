@@ -1,9 +1,13 @@
 # network-automation-course
 
+The base network diagram is pretty simple.  Mainly because I only have enough memory in my laptop to handle a couple of Vagrant boxes at once.
+
 ![Base Network Diagram](images/base_%20network_diagram.png)
 
 
 # resources
+
+These are some resources I found helpful while setting up this lab.
 
 ## virtual device resources
 [Virtual NX-OS 9/3K Config Guide](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/7-x/nx-osv/configuration/guide/b_NX-OSv_9000/b_NX-OSv_chapter_01.html#id_45079)
@@ -36,6 +40,9 @@ socat UNIX-CONNECT:/tmp/test STDIN
 ```
 
 ## NX-OSv POAP
+
+I ran into a host of odd issues related to Cisco POAP and the virtual NXOS software.  I documented some of the below:
+
 - While running the POAP scripts, the bios upgrade check fails on v9k because the bios version can't be parsed from the `show ver` (the value is empty).
   I had to add some code to to the paop script to account for this difference in the v9k `show ver`.
 - NXOSv devies do *not* have static serial numbers.  Each time you destroy/rebuild the box the v9k will have a new serial number. 
