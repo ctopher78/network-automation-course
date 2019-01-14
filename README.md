@@ -1,9 +1,28 @@
 # network-automation-course
 
+This is my [Building Automated Networks](https://my.ipspace.net/bin/list?id=NetAutSol) project repo.
+
 The base network diagram is pretty simple.  Mainly because I only have enough memory in my laptop to handle a couple of Vagrant boxes at once.
 
 ![Base Network Diagram](images/base_%20network_diagram.png)
 
+## Vagrant Boxes
+
+**1. CentOS|7**
+This device runs all the services needed to test my automation solutions.
+
+Added Software:
+- Ansible 2.7.5
+- Go 1.11.4
+
+Services Running:
+- DHCP
+- TFTP
+- Rsyslog listener
+- Custom Golang DHCP snooping service 
+
+**2. Cisco NXOSv [nxosv-final.7.0.3.I6.1.box]**(https://software.cisco.com/download/home/286312239/type/282088129/release/7.0%25283%2529I6%25281%2529)
+- not much else to say...
 
 # resources
 
@@ -50,4 +69,3 @@ I ran into a host of odd issues related to Cisco POAP and the virtual NXOS softw
   initialized.  I created a program to do this, with the uncleaver name of `ConfigRenamer`.  This program is always running in 
   the background and is looking for DHCP request packets.  If it sees a DHCP request packet from an v9k, it will rename the 
   config file in /var/lib/tftpboot/cfg.<serial_number> to a name that includes the correct serial number.
-- 
