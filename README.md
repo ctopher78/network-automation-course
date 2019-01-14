@@ -1,6 +1,6 @@
 # network-automation-course
 
-![Base Network Diagram](https://github.com/ctopher78/network-automation-course/tree/master/images/base_network_diagram.png)
+![Base Network Diagram](images/base_network_diagram.png)
 
 
 # resources
