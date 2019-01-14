@@ -48,6 +48,32 @@
   environment:
     GOPATH: "{{ gopath }}"
     GOROOT: "{{ goroot }}"
-    GO111MODULE: ""
   with_items: "{{ go_get }}"
   changed_when: false
+
+- name: Compile ConfigNamer
+  shell: "cp -r {{ item.src }} {{ gopath }}/src/{{ item.src }} ; {{ goroot }}/bin/go build -o {{ item.dest }} {{ item.src }}"
+  environment:
+    GOPATH: "{{ gopath }}"
+    GOROOT: "{{ goroot }}"
+  with_items: "{{ go_build }}"
+  changed_when: false
+
+- name: Systemd for ConfigNamer (renamer)
+  copy: 
+    src: /vagrant/roles/mgt_server/files/renamer.service
+    dest: /etc/systemd/system/renamer.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable custom services
+  systemd:
+    name: "{{ service }}"
+    state: started
+    enabled: yes
+  loop:
+      - renamer
+  loop_control:
+    loop_var: service
+  become_user: root

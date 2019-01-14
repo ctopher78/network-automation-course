@@ -44,3 +44,21 @@
     validate: 'dhcpd -t -cf %s'
   notify: 
     - restart dhcpd
+
+- name: Configure Syslog Listener
+  replace:
+    path: /etc/rsyslog.conf
+    regexp: '^#(\$ModLoad imudp)'
+    replace: '\1'
+
+- name: Configure Syslog Listener UDP 
+  replace:
+    path: /etc/rsyslog.conf
+    regexp: '^#(\$UDPServerRun 514)'
+    replace: '\1'
+  notify: restart rsyslog
+
+- name: Add Spine1 to /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: '192.168.2.2 spine1 spn1'

@@ -26,7 +26,11 @@ go_version_target: "go version go1.11.4 linux/amd64"
 go_bin: $PATH:/usr/local/go/bin
 go_path: GOPATH=$HOME/go
 
-# Go get
 go_get:
 - name: gopacket
   url: github.com/google/gopacket
+
+go_build:
+- name: configNamer
+  src: ConfigNamer
+  dest: /home/vagrant/renamer

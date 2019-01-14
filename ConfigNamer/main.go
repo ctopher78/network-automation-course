@@ -1,3 +1,17 @@
+/*
+ConfigNamer snoops DHCP traffic for NXOSv DHCP Requests.
+
+Background:
+Cisco NXOSv virtual devices DON'T have a fixed Serial Numbers; however, I wanted to create a POAP
+test environment that utilized Serial Number based POAP.  Since I can't rely on a fixed
+Serial Number, I created this program to parse the virtual devices Serial Number from the DHCP
+Requests, then use the discovered SN to udpate the NXOS config that was written to '/var/lib/tftpboot'
+by Ansible.
+
+This service run continuosly and is managed by systemctl as 'renamer.service'.
+
+*/
+
 package main
 
 import (

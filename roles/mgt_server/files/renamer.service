@@ -1,0 +1,15 @@
+[Unit]
+Description=renames Cisco NXOSv config files
+
+[Service]
+User=root
+Group=root
+
+Restart=on-failure
+RestartSec=10
+
+# ExecStart=/home/vagrant/renamer
+ExecStart=/bin/sh -c 'cd /home/vagrant; sudo ./renamer'
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 # network-automation-course
 
+![Base Network Diagram](https://github.com/ctopher78/network-automation-course/images/base_network_diagram.jpg)
 
 
 # resources
@@ -21,7 +22,7 @@
 
 # Tips & Tricks
 
-## Console into a nx-osv
+## Console into a v9k
 - install socat
 
 ```
@@ -35,4 +36,11 @@ socat UNIX-CONNECT:/tmp/test STDIN
 ```
 
 ## NX-OSv POAP
-- The bios upgrade check fails on v9k because the bios version can't be parsed from the `show ver` (the value is null)
+- While running the POAP scripts, the bios upgrade check fails on v9k because the bios version can't be parsed from the `show ver` (the value is empty).
+  I had to add some code to to the paop script to account for this difference in the v9k `show ver`.
+- NXOSv devies do *not* have static serial numbers.  Each time you destroy/rebuild the box the v9k will have a new serial number. 
+  If you want to use serial number poap'ing method, which I did, you need to update the device config file name after the v9k has
+  initialized.  I created a program to do this, with the uncleaver name of `ConfigRenamer`.  This program is always running in 
+  the background and is looking for DHCP request packets.  If it sees a DHCP request packet from an v9k, it will rename the 
+  config file in /var/lib/tftpboot/cfg.<serial_number> to a name that includes the correct serial number.
+- 
