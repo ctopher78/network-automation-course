@@ -58,6 +58,11 @@ brew install socat
 socat UNIX-CONNECT:/tmp/test STDIN
 ```
 
+## Run vagrant_provisioning playbook on CentOS box
+```
+ansible-playbook -i 127.0.0.1, vagrant_provisioning.yml
+```
+
 ## NX-OSv POAP
 
 I ran into a host of odd issues related to Cisco POAP and the virtual NXOS software.  I documented some of the below:
