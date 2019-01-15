@@ -2,7 +2,9 @@
 
 This is my [Building Automated Networks](https://my.ipspace.net/bin/list?id=NetAutSol) project repo.
 
-The base network diagram is pretty simple.  Mainly because I only have enough memory in my laptop to handle a couple of Vagrant boxes at once.
+My base automation lab is pretty simple.  Mainly because I only have enough memory in my laptop to handle a couple of Vagrant boxes at once.  I'll probably add other virtual boxes (Juniper, Arista, and Cumulus) just to toy around, but I'll only be able to run two boxes at a time, unless I adapt things to run on a public cloud somewhere.
+
+At this point the CentOS box is being provisioned using Ansible, and the virtual Cisco NXOS 9k is getting it's initial config via ZTP.  More details about that are below.
 
 ![Base Network Diagram](images/base_%20network_diagram.png)
 
@@ -25,7 +27,7 @@ Services Running:
 
 **2. Cisco NXOSv [nxosv-final.7.0.3.I6.1.box](https://software.cisco.com/download/home/286312239/type/282088129/release/7.0%25283%2529I6%25281%2529)**
 - Initial config is added using POAP.  I realize that there are easier ways to configure the NXOSv, but I wanted a POAP test-ground.
-- v9k's don't have static serial numbers, so I created a Go program that runs in the background and renames the `spine1` config file automatically.  This program snoops DHCP request packets to determine the current serial number associated to the active v9k Vagrant Box.
+- v9k's don't have static serial numbers, so I created a Go program that runs in the background and renames the `spine1` config file automatically.  This program snoops the `ClientID` from DHCP request packets to determine the current serial number associated with the currently active v9k Vagrant Box.  If you `vagrant destroy spine1` and then `vagrant up spine`, this program will automatically update the name of the config that POAP will try to download.
 
 # Running this lab
 
@@ -48,7 +50,7 @@ vagran ssh spine1
 password: Admin1234!
 ```
 
-**If you want to watch the device boot up, you can console in as well:**
+**Or, if you want to watch the device boot up, you can console in as well (MacOSX instructions):**
 
 - install socat
 
