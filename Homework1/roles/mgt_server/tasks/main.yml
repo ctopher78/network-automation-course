@@ -1,0 +1,9 @@
+---
+- name: import server tasks
+  include_tasks: "{{ task }}"
+  loop:
+    - tools.yml
+    - services.yml
+    - ztp_setup.yml
+  loop_control:
+    loop_var: task

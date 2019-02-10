@@ -1,0 +1,12 @@
+---
+- name: Copy NXOS 9k Poap Script To tftpboot Dir
+  copy: 
+    src: /vagrant/roles/mgt_server/files/poap.py
+    dest: /var/lib/tftpboot/nxos_poap.py
+    owner: root
+    group: root
+    mode: 0644
+
+- name: generate poap script md5 header
+  shell: f=/var/lib/tftpboot/nxos_poap.py ; cat $f | sed '/^#md5sum/d' > $f.md5 ; sed -i "s/^#md5sum=.*/#md5sum=\"$(md5sum $f.md5 | sed 's/ .*//')\"/" $f
+  become_user: root
