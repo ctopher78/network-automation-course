@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://unpkg.com/viz.js@1.8.0/viz.js" type="javascript/worker"></script>
+<script src="https://unpkg.com/d3-graphviz@1.0.1/build/d3-graphviz.min.js"></script>
+<div id="graph" style="text-align: center;"></div>
+
+<script>
+function attributer(datum, index, nodes) {
+    var selection = d3.select(this);
+    if (datum.tag == "svg") {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var x = 200;
+        var y = 10
+        var scale = 0.75;
+        selection
+            .attr("width", width + "pt")
+            .attr("height", height + "pt")
+            .attr("viewBox", -x + " " + -y + " " + (width / scale) + " " + (height / scale));
+        datum.attributes.width = width + "pt";
+        datum.attributes.height = height + "pt";
+        datum.attributes.viewBox = -x + " " + -y + " " + (width / scale) + " " + (height / scale);
+    }
+}
+function transitionFactory() {
+    return d3.transition("main")
+        .ease(d3.easeLinear)
+        .delay(100)
+        .duration(300 * dotIndex);
+}
+var dotIndex = 0;
+var graphviz = d3.select("#graph").graphviz()
+    .logEvents(true)
+//    .transition(transitionFactory)
+    .tweenShapes(false)
+    .on("initEnd", render)
+    .attributer(attributer);
+function render() {
+    var dotLines = dots[dotIndex % dots.length];
+    var dot = dotLines.join('');
+    graphviz
+        .renderDot(dot)
+        .on("end", function () {
+            dotIndex += 1;
+            if (dotIndex != dots.length) {
+                render();
+            }
+        });
+}
+var colors = d3.schemeCategory20;
+var dots = [ 
+    [
+{% include "dot.jinja" %}
+    ],    
+];
+</script>
+</head>

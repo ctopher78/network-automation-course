@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://unpkg.com/viz.js@1.8.0/viz.js" type="javascript/worker"></script>
+<script src="https://unpkg.com/d3-graphviz@1.0.1/build/d3-graphviz.min.js"></script>
+<div id="graph" style="text-align: center;"></div>
+
+<script>
+function attributer(datum, index, nodes) {
+    var selection = d3.select(this);
+    if (datum.tag == "svg") {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var x = 200;
+        var y = 10
+        var scale = 0.75;
+        selection
+            .attr("width", width + "pt")
+            .attr("height", height + "pt")
+            .attr("viewBox", -x + " " + -y + " " + (width / scale) + " " + (height / scale));
+        datum.attributes.width = width + "pt";
+        datum.attributes.height = height + "pt";
+        datum.attributes.viewBox = -x + " " + -y + " " + (width / scale) + " " + (height / scale);
+    }
+}
+function transitionFactory() {
+    return d3.transition("main")
+        .ease(d3.easeLinear)
+        .delay(100)
+        .duration(300 * dotIndex);
+}
+var dotIndex = 0;
+var graphviz = d3.select("#graph").graphviz()
+    .logEvents(true)
+//    .transition(transitionFactory)
+    .tweenShapes(false)
+    .on("initEnd", render)
+    .attributer(attributer);
+function render() {
+    var dotLines = dots[dotIndex % dots.length];
+    var dot = dotLines.join('');
+    graphviz
+        .renderDot(dot)
+        .on("end", function () {
+            dotIndex += 1;
+            if (dotIndex != dots.length) {
+                render();
+            }
+        });
+}
+var colors = d3.schemeCategory20;
+var dots = [ 
+    [
+'digraph G {',
+    'rankdir=TB;',
+    'ranksep=2',
+    'node [style=filled shape=mrecord]',
+
+
+
+    ' subgraph cluster_spine1 {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="spine1 (asn60001)"',
+    '   "172.16.0.0",',
+    '   "172.16.0.4",',
+    '   "172.16.0.8";',
+    '}',
+
+    ' subgraph cluster_spine2 {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="spine2 (asn60002)"',
+    '   "172.16.0.2",',
+    '   "172.16.0.6",',
+    '   "172.16.0.10";',
+    '}',
+
+    ' subgraph cluster_leaf1 {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="leaf1 (asn60011)"',
+    '   "172.16.0.1",',
+    '   "172.16.0.3";',
+    '}',
+
+    ' subgraph cluster_leaf2 {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="leaf2 (asn60012)"',
+    '   "172.16.0.5",',
+    '   "172.16.0.7";',
+    '}',
+
+    ' subgraph cluster_leaf3 {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="leaf3 (asn60013)"',
+    '   "172.16.0.9",',
+    '   "172.16.0.11";',
+    '}',
+
+
+
+    ' "172.16.0.0" [label="172.16.0.0", style=filled, fillcolor=green]',
+    ' "172.16.0.4" [label="172.16.0.4", style=filled, fillcolor=green]',
+    ' "172.16.0.8" [label="172.16.0.8", style=filled, fillcolor=green]',
+    ' "172.16.0.2" [label="172.16.0.2", style=filled, fillcolor=green]',
+    ' "172.16.0.6" [label="172.16.0.6", style=filled, fillcolor=green]',
+    ' "172.16.0.10" [label="172.16.0.10", style=filled, fillcolor=green]',
+    ' "172.16.0.1" [label="172.16.0.1", style=filled, fillcolor=green]',
+    ' "172.16.0.3" [label="172.16.0.3", style=filled, fillcolor=green]',
+    ' "172.16.0.5" [label="172.16.0.5", style=filled, fillcolor=green]',
+    ' "172.16.0.7" [label="172.16.0.7", style=filled, fillcolor=green]',
+    ' "172.16.0.9" [label="172.16.0.9", style=filled, fillcolor=green]',
+    ' "172.16.0.11" [label="172.16.0.11", style=filled, fillcolor=green]',
+
+
+    ' "172.16.0.0" -> "172.16.0.1"',
+    ' "172.16.0.4" -> "172.16.0.5"',
+    ' "172.16.0.8" -> "172.16.0.9"',
+    ' "172.16.0.2" -> "172.16.0.3"',
+    ' "172.16.0.6" -> "172.16.0.7"',
+    ' "172.16.0.10" -> "172.16.0.11"',
+    ' "172.16.0.1" -> "172.16.0.0"',
+    ' "172.16.0.3" -> "172.16.0.2"',
+    ' "172.16.0.5" -> "172.16.0.4"',
+    ' "172.16.0.7" -> "172.16.0.6"',
+    ' "172.16.0.9" -> "172.16.0.8"',
+    ' "172.16.0.11" -> "172.16.0.10"',
+'}'
+    ],    
+];
+</script>
+</head>

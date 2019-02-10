@@ -1,0 +1,9 @@
+---
+global:
+  connection_options:
+    napalm:
+      username: vagrant
+      password: vagrant
+      extras: 
+        optional_args: 
+          ssh_config_file: ssh-configs

@@ -1,0 +1,48 @@
+---
+spine1:
+  hostname: spine1
+  platform: junos
+  groups:
+    - global
+  data:
+    role: spine
+
+spine2:
+  hostname: spine2
+  platform: junos
+  groups:
+    - global
+  data:
+    role: spine
+
+leaf1:
+  hostname: leaf1
+  platform: junos
+  groups:
+    - global
+  data:
+    role: leaf
+
+leaf2:
+  hostname: leaf2
+  platform: junos
+  groups:
+    - global
+  data:
+    role: leaf
+
+leaf3:
+  hostname: leaf3
+  platform: junos
+  groups:
+    - global
+  data:
+    role: leaf
+
+# leaf4:
+#   hostname: leaf4
+#   platform: junos
+#   groups:
+#     - global
+#   data:
+#     role: leaf
