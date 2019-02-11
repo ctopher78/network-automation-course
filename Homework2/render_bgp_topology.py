@@ -11,21 +11,6 @@ from nornir.plugins.functions.text import print_result
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
-nr = InitNornir(
-    core={"num_workers": 100},
-    inventory={
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": "inventory/hosts.yaml",
-            "group_file": "inventory/groups.yaml"
-        }
-    }
-)
-
-
-def bgp_graph(task):
-    pass
-
 def main():
 
     devices = InitNornir(
