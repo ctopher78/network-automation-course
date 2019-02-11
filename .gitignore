@@ -1,3 +1,5 @@
 .vagrant
 *.retry
 .vscode
+
+**/*.log

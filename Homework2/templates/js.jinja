@@ -7,53 +7,8 @@
 <div id="graph" style="text-align: center;"></div>
 
 <script>
-function attributer(datum, index, nodes) {
-    var selection = d3.select(this);
-    if (datum.tag == "svg") {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        var x = 200;
-        var y = 10
-        var scale = 0.75;
-        selection
-            .attr("width", width + "pt")
-            .attr("height", height + "pt")
-            .attr("viewBox", -x + " " + -y + " " + (width / scale) + " " + (height / scale));
-        datum.attributes.width = width + "pt";
-        datum.attributes.height = height + "pt";
-        datum.attributes.viewBox = -x + " " + -y + " " + (width / scale) + " " + (height / scale);
-    }
-}
-function transitionFactory() {
-    return d3.transition("main")
-        .ease(d3.easeLinear)
-        .delay(100)
-        .duration(300 * dotIndex);
-}
-var dotIndex = 0;
-var graphviz = d3.select("#graph").graphviz()
-    .logEvents(true)
-//    .transition(transitionFactory)
-    .tweenShapes(false)
-    .on("initEnd", render)
-    .attributer(attributer);
-function render() {
-    var dotLines = dots[dotIndex % dots.length];
-    var dot = dotLines.join('');
-    graphviz
-        .renderDot(dot)
-        .on("end", function () {
-            dotIndex += 1;
-            if (dotIndex != dots.length) {
-                render();
-            }
-        });
-}
-var colors = d3.schemeCategory20;
-var dots = [ 
-    [
-{% include "dot.jinja" %}
-    ],    
-];
+d3.select("#graph").graphviz()
+    .fade(false)
+    .renderDot({% include "dot.jinja" %});
 </script>
 </head>

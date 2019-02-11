@@ -6,7 +6,7 @@ My base automation lab is pretty simple.  Mainly because I only have enough memo
 
 At this point the CentOS box is being provisioned using Ansible, and the virtual Cisco NXOS 9k is getting it's initial config via ZTP.  More details about that are below.
 
-![Base Network Diagram](images/base_%20network_diagram.png)
+![Base Network Diagram](../images/base_%20network_diagram.png)
 
 ## Vagrant Boxes
 

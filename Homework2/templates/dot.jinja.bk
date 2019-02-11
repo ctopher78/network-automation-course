@@ -1,0 +1,44 @@
+'digraph G {',
+    'rankdir=TB;',
+    'ranksep=2',
+    'node [style=filled shape=mrecord]',
+
+{% for hostname, remote_asns in netdev_bgp.items() %}
+{% set l_as = remote_asns.values()|list %}
+    ' subgraph cluster_{{ hostname }} {',
+    '   ordering=out;',
+    '   colorscheme=pastel14;',
+    '   color=2;',
+    '   style=filled;',
+    '   label="{{ hostname }} (asn{{ l_as[0][0].local_as }})"',
+{%- for remote_asn, bgp_values in remote_asns.items() %}
+{%-      if not loop.last %}
+    '   "{{ bgp_values[0]["local_address"] }}",',
+{%-      else %}
+    '   "{{ bgp_values[0]["local_address"] }}";',
+{%-      endif %}
+{%- endfor %}
+    '}',
+{%- endfor %}
+
+
+{% for nodes in netdev_bgp.values() %}
+{%-     for node in nodes.values() %}
+{%-          if node[0].up %}
+    ' "{{ node[0]["local_address"] }}" [label="{{ node[0]["local_address"] }}", style=filled, fillcolor=green]',
+{%-          else %}
+    ' "{{ node[0]["local_address"] }}" [label="{{ node[0]["local_address"] }}", style=filled, fillcolor=red]',
+{%-          endif %}
+{%- endfor %}
+{%- endfor %}
+
+{% for edges in netdev_bgp.values() %}
+{%- for edge in edges.values() %}
+{%-          if edge[0].up %}
+    ' "{{ edge[0]["local_address"] }}" -> "{{ edge[0]["remote_address"] }}"',
+{%-          else %}
+    ' "{{ edge[0]["local_address"] }}" -> "{{ edge[0]["remote_address"] }}" [color=red]',
+{%-          endif %}
+{%- endfor %}
+{%- endfor %}
+'}'
