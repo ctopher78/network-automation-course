@@ -1,14 +1,3 @@
-Host leaf1
-  HostName 127.0.0.1
-  User vagrant
-  Port 2200
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentityFile /Users/ccrook/.vagrant.d/insecure_private_key
-  IdentitiesOnly yes
-  LogLevel FATAL
-
 Host spine1
   HostName 127.0.0.1
   User vagrant
@@ -20,7 +9,18 @@ Host spine1
   IdentitiesOnly yes
   LogLevel FATAL
 
-Host leaf2
+Host spine2
+  HostName 127.0.0.1
+  User vagrant
+  Port 2200
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/ccrook/.vagrant.d/insecure_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+Host leaf1
   HostName 127.0.0.1
   User vagrant
   Port 2201
@@ -31,7 +31,7 @@ Host leaf2
   IdentitiesOnly yes
   LogLevel FATAL
 
-Host leaf3
+Host leaf2
   HostName 127.0.0.1
   User vagrant
   Port 2202
@@ -42,7 +42,7 @@ Host leaf3
   IdentitiesOnly yes
   LogLevel FATAL
 
-Host spine2
+Host leaf3
   HostName 127.0.0.1
   User vagrant
   Port 2203
