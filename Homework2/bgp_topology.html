@@ -32,9 +32,10 @@ d3.select("#graph").graphviz()
        colorscheme=pastel14;
        color=2;
        style=filled;
-       label="spine2 (asn60013)"
-       "172.16.0.9"
-       "172.16.0.11";
+       label="spine2 (asn60002)"
+       "172.16.0.2"
+       "172.16.0.6"
+       "172.16.0.10";
     }
 
      subgraph cluster_leaf1 {
@@ -42,10 +43,9 @@ d3.select("#graph").graphviz()
        colorscheme=pastel14;
        color=2;
        style=filled;
-       label="leaf1 (asn60002)"
-       "172.16.0.2"
-       "172.16.0.6"
-       "172.16.0.10";
+       label="leaf1 (asn60011)"
+       "172.16.0.1"
+       "172.16.0.3";
     }
 
      subgraph cluster_leaf2 {
@@ -53,9 +53,9 @@ d3.select("#graph").graphviz()
        colorscheme=pastel14;
        color=2;
        style=filled;
-       label="leaf2 (asn60011)"
-       "172.16.0.1"
-       "172.16.0.3";
+       label="leaf2 (asn60012)"
+       "172.16.0.5"
+       "172.16.0.7";
     }
 
      subgraph cluster_leaf3 {
@@ -63,9 +63,9 @@ d3.select("#graph").graphviz()
        colorscheme=pastel14;
        color=2;
        style=filled;
-       label="leaf3 (asn60012)"
-       "172.16.0.5"
-       "172.16.0.7";
+       label="leaf3 (asn60013)"
+       "172.16.0.9"
+       "172.16.0.11";
     }
 
 
@@ -73,8 +73,6 @@ d3.select("#graph").graphviz()
      "172.16.0.0" [label="172.16.0.0", style=filled, fillcolor=green]
      "172.16.0.4" [label="172.16.0.4", style=filled, fillcolor=green]
      "172.16.0.8" [label="172.16.0.8", style=filled, fillcolor=green]
-     "172.16.0.9" [label="172.16.0.9", style=filled, fillcolor=green]
-     "172.16.0.11" [label="172.16.0.11", style=filled, fillcolor=green]
      "172.16.0.2" [label="172.16.0.2", style=filled, fillcolor=green]
      "172.16.0.6" [label="172.16.0.6", style=filled, fillcolor=green]
      "172.16.0.10" [label="172.16.0.10", style=filled, fillcolor=green]
@@ -82,13 +80,13 @@ d3.select("#graph").graphviz()
      "172.16.0.3" [label="172.16.0.3", style=filled, fillcolor=green]
      "172.16.0.5" [label="172.16.0.5", style=filled, fillcolor=green]
      "172.16.0.7" [label="172.16.0.7", style=filled, fillcolor=green]
+     "172.16.0.9" [label="172.16.0.9", style=filled, fillcolor=green]
+     "172.16.0.11" [label="172.16.0.11", style=filled, fillcolor=green]
 
 
      "172.16.0.0" -> "172.16.0.1"
      "172.16.0.4" -> "172.16.0.5"
      "172.16.0.8" -> "172.16.0.9"
-     "172.16.0.9" -> "172.16.0.8"
-     "172.16.0.11" -> "172.16.0.10"
      "172.16.0.2" -> "172.16.0.3"
      "172.16.0.6" -> "172.16.0.7"
      "172.16.0.10" -> "172.16.0.11"
@@ -96,6 +94,8 @@ d3.select("#graph").graphviz()
      "172.16.0.3" -> "172.16.0.2"
      "172.16.0.5" -> "172.16.0.4"
      "172.16.0.7" -> "172.16.0.6"
+     "172.16.0.9" -> "172.16.0.8"
+     "172.16.0.11" -> "172.16.0.10"
 }`);
 </script>
 </head>
