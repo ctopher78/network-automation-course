@@ -12,7 +12,7 @@ This lab contains on NXOS switch and a host that provides the necessary services
 
 
 ### Homework2
-#### Juniper BGP Topology Discovery and Visualiztion
+#### Juniper BGP Topology Discovery and Visualization
 
 This lab contains a simple Juniper fabric topology consiting of 2 spine switches and 3 leaf switches (all vQFX).
 
