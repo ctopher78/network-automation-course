@@ -30,9 +30,8 @@ def main():
     for k, v in results.items():
         bgp[k] = v.result["get_bgp_neighbors_detail"]["global"]
 
-    print(json.dumps(bgp, indent=2))
     env = Environment(
-        loader=PackageLoader('bgp_topology', 'templates'),
+        loader=PackageLoader('render_bgp_topology', 'templates'),
         autoescape=select_autoescape(['html'])
     )
 
