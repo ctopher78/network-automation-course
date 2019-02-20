@@ -38,11 +38,3 @@ leaf3:
     - global
   data:
     role: leaf
-
-# leaf4:
-#   hostname: leaf4
-#   platform: junos
-#   groups:
-#     - global
-#   data:
-#     role: leaf
