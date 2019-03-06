@@ -1,0 +1,37 @@
+{
+   "name":"junos-qfx",
+   "description":"YDK bundle for Juniper Junos QFX models",
+   "version":"17.4R1.0",
+   "core_version":"0.5.0",
+   "author":"Juniper",
+   "copyright":"Juniper",
+   "models":{
+      "git":[
+         {
+            "url":"https://github.com/Juniper/yang.git",
+            "commits":[
+               {
+                  "commitid":"1073cfea7f5ab0e263eeb025ef78a368812098b8",
+                  "dir":[
+                     "17.4/17.4R1/common"
+                  ],
+                  "file": [
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-root@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-interfaces@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-system@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-protocols@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-policy-options@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-access@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/conf-with-extensions/junos-qfx-conf-routing-options@2017-01-01.yang",
+
+                     "17.4/17.4R1/junos-qfx/rpc-with-extensions/junos-qfx-rpc-traceroute@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/rpc-with-extensions/junos-qfx-rpc-ping@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/rpc-with-extensions/junos-qfx-rpc-bgp@2017-01-01.yang",
+                     "17.4/17.4R1/junos-qfx/rpc-with-extensions/junos-qfx-rpc-cli@2017-01-01.yang"
+                  ]
+               }
+            ]
+         }
+      ]
+   }
+}

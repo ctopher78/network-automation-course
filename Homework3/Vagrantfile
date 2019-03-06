@@ -1,0 +1,89 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+# Copyright 2016 Cisco Systems, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+## Generate a unique ID for this project
+UUID = "PNONRD"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.ssh.insert_key = false
+
+    (1..2).each do |id|
+        re_name  = ( "vqfx" + id.to_s ).to_sym
+
+        ##########################
+        ## Routing Engine  #######
+        ##########################
+        config.vm.define re_name do |vqfx|
+            vqfx.vm.hostname = "vqfx#{id}"
+            vqfx.vm.box = 'juniper/vqfx10k-re'
+
+            # DO NOT REMOVE / NO VMtools installed
+            vqfx.vm.synced_folder '.', '/vagrant', disabled: true
+
+            # Management port (em1 / em2)
+            vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: "#{UUID}_vqfx_internal_#{id}"
+            vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: "#{UUID}_reserved-bridge"
+
+            # Server port (em8)
+            vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: "server_port#{id}"
+
+            # (em3 -- em7)
+            (2..5).each do |seg_id|
+                vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: "#{UUID}_seg#{seg_id}"
+            end
+        end
+    end
+
+    ##########################
+    ## Server          #######
+    ##########################
+    config.vm.define "ydk-py-ubuntu", primary: true do |ydk_py_ubuntu|
+        ydk_py_ubuntu.vm.box = "ydk-py-ubuntu"
+        ydk_py_ubuntu.vm.hostname = "server"
+        ydk_py_ubuntu.vm.box_url = "http://ydk.cisco.com/vagrant/ydk-py-ubuntu/"
+        ydk_py_ubuntu.vm.synced_folder "samples", "/home/vagrant/samples"
+        ydk_py_ubuntu.vm.synced_folder "projects", "/home/vagrant/projects"
+        ydk_py_ubuntu.vm.provider "virtualbox" do |vb|
+          vb.memory = "4096"
+        end
+        ydk_py_ubuntu.vm.provision "shell",
+          inline: "sudo pip install projects/ydk-models-junos-qfx-17.4R1.0.tar.gz ; sudo pip install pyyaml"
+        ydk_py_ubuntu.vm.network 'private_network', ip: "10.10.1.2", virtualbox__intnet: "server_port1"
+        ydk_py_ubuntu.vm.network 'private_network', ip: "10.10.2.2", virtualbox__intnet: "server_port2"
+        ydk_py_ubuntu.ssh.insert_key = true
+      end
+
+    ##############################
+    ## Box provisioning    #######
+    ##############################
+    if !Vagrant::Util::Platform.windows?
+        config.vm.provision "ansible" do |ansible|
+            ansible.groups = {
+                "vqfx10k" => ["vqfx1", "vqfx2" ],
+                "all:children" => ["vqfx10k"]
+            }
+            ansible.playbook = "provisioning/pb.conf.all.commit.yaml"
+        end
+    end
+end
