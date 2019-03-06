@@ -16,7 +16,7 @@ This lab contains on NXOS switch and a host that provides the necessary services
 
 This lab contains a simple Juniper fabric topology consiting of 2 spine switches and 3 leaf switches (all vQFX).
 
-The automation for this assignment uses NAPALM and Nornir to read the networks current BGP state and generates an HTML/JS DOT page representing the BPG connections between all the devices and there status.
+The automation for this assignment uses NAPALM and Nornir to read the networks current BGP state and generates an HTML/JS DOT page representing the BPG connections between all the devices and thier status.
 
 
 
