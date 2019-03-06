@@ -10,7 +10,9 @@ ansible = "*"
 junos-eznc = "*"
 napalm = "*"
 nornir = "*"
-ipython = "*"
+ipython = "*" 
+napalm-yang = "*"
+pyangbind = "*"
 
 [requires]
 python_version = "3.7"
