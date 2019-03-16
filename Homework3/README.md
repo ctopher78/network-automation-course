@@ -17,7 +17,7 @@ Cisco has also released a web-based [YANG explorer](https://developer.cisco.com/
 
 The easiest way to get yang-explorer running is to use the [dockerfile here](https://hub.docker.com/r/robertcsapo/yang-explorer/).
 
-
+![yang-exploredr](../images/yang-explorer.png)
 
 # Edge Builder Lab
 
