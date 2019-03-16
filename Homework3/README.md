@@ -12,6 +12,11 @@ After toiling about for a few days I ran across a NANOG 68 video titled [Ok, We 
 
 I was highly impressed with the NANOG presentation and the YDK-Gen and YDK-Py libraries.  Since I was using a Junos lab, I needed to create my own Junos YANG model Python bindings.  I first tracked down and copied the Junos YANG models I was interested in implementing [from here](https://github.com/Juniper/yang/tree/master/17.4/17.4R1).  Then I followed the directions [from here](https://github.com/CiscoDevNet/ydk-gen#generate-ydk-components) to create my Python bindings.  **NOTE**: If you want to generate your own YDK bindings, using the provided [docker image](https://github.com/CiscoDevNet/ydk-gen#docker) will save you some time and trouble.  Here is [the model bundle profile](Homework3/profiles/junos-qfx-17_4R1.json) I wrote to generate Junos Python bindings.  The generated bindings are [here](Homework3/projects).  Once I had the `tar.gz`, I just needed to `pip install` (which happens in the vagrant file) and off I went!
 
+## Yang Explorer
+Cisco has also released a web-based [YANG explorer](https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/yang-explorer/), which greatly helps with navigating and making sense of a particular yang model.
+
+The easiest way to get yang-explorer running is to use the [dockerfile here](https://hub.docker.com/r/robertcsapo/yang-explorer/).
+
 
 
 # Edge Builder Lab
