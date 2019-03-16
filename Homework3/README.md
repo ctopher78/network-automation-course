@@ -21,7 +21,7 @@ The easiest way to get yang-explorer running is to use the [dockerfile here](htt
 
 # Edge Builder Lab
 
-The lab is pretty simple.  I wanted to create a simple data-model that modeled edges between two nodes.  Then, I'd use `ydk-py` to configure the edges, which consists of configuring the interfaces and BGP adjacencies.  My goal, as mentioned above, was to leverage NETCONF and YANG Model bindings to configure a device.  
+The lab is pretty simple.  I wanted to create a simple data-model that modeled edges between two nodes.  Then, I'd use `ydk-py` to configure the edges, which consists of configuring the interfaces and BGP adjacencies.  My goal, as mentioned above, was to leverage NETCONF and YANG Model bindings to configure a device -- and *NOT* use any templatized CLI commands!
 
 Topology ([find this setup here](https://github.com/Juniper/vqfx10k-vagrant/tree/master/light-2qfx))
 ```
