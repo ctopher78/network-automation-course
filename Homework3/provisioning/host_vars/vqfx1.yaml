@@ -17,19 +17,4 @@ underlay:
         asn: 60002
         peer_ip: 10.10.4.2
         local_ip: 10.10.4.1
-      # - interface: em5
-      #   name: vqfx2 em5
-      #   asn: 60002
-      #   peer_ip: 10.10.5.2
-      #   local_ip: 10.10.5.1
-      # - interface: em6
-      #   name: vqfx2 em6
-      #   asn: 60002
-      #   peer_ip: 10.10.6.2
-      #   local_ip: 10.10.6.1
-      # - interface: em7
-      #   name: vqfx2 em7
-      #   asn: 60002
-      #   peer_ip: 10.10.7.2
-      #   local_ip: 10.10.7.1
 
