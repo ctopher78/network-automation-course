@@ -13,6 +13,7 @@ nornir = "*"
 ipython = "*" 
 napalm-yang = "*"
 pyangbind = "*"
+ydk = "*"
 
 [requires]
 python_version = "3.7"
